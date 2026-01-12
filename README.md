@@ -1,1 +1,1 @@
-# prog-str-su-ixaya-velez-2c
+##Este es el repositorio que vamos a usar en el primer cuatrimestre
