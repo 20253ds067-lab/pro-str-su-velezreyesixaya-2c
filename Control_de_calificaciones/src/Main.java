@@ -1,56 +1,41 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
-        Scanner leer = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        GradeService service = new GradeService();
+        Validador validador = new Validador();
 
-        String nombre_usuario;
+        String nombre = validador.leerTextoNoVacio(sc, "Ingresa el nombre del alumno:");
 
-        double cal1 ;
-        double cal2;
-        double cal3;
-        double promedio_par=0;
-        double calificacion_final=0;
+        double p1 = validador.leerDoubleEnRango(sc, "Calificación Parcial 1 (0-100):", 0, 100);
+        double p2 = validador.leerDoubleEnRango(sc, "Calificación Parcial 2 (0-100):", 0, 100);
+        double p3 = validador.leerDoubleEnRango(sc, "Calificación Parcial 3 (0-100):", 0, 100);
 
-        int asistencia;
+        int asistencia = validador.leerIntEnRango(sc, "Porcentaje de Asistencia (0-100):", 0, 100);
 
-        boolean entrega_proyecto;
+        boolean proyecto = validador.leerBooleanos(sc, "¿Entregó el proyecto final? (true/false):");
 
-        System.out.println("Ingresa el nombre del alumno");
-        nombre_usuario = leer.nextLine();
+        double promedio = service.calcularPromedio(p1, p2, p3);
+        double notaFinal = service.calcularFinal(promedio, asistencia);
+        String estado = service.determinarEstado(notaFinal, asistencia, proyecto);
 
-        System.out.println("Ingresa tu calificacion I");
-        cal1 = leer.nextDouble();
-
-        System.out.println("Ingresa tu calificacion II");
-        cal2 = leer.nextDouble();
-
-        System.out.println("Ingresa tu calificacion III");
-        cal3 = leer.nextDouble();
-
-        System.out.println("Ingresa tu asistencia del 0 al 100:");
-        asistencia = leer.nextInt();
-
-        System.out.println("Entrego Proyecto(true false):");
-        entrega_proyecto = leer.nextBoolean();
-
-        reporte_final(nombre_usuario,cal1,cal2,cal3,promedio_par,asistencia,entrega_proyecto,calificacion_final);
-
+        imprimirReporte(nombre, p1, p2, p3, promedio, asistencia, proyecto, notaFinal, estado);
     }
-    public static void reporte_final(String nombre,double par1,double par2,double par3,double prom_par,int asis,boolean entrega_p,double cal_final){
-        System.out.println("==============================");
-        System.out.println("         REPORTE FINAL        ");
-        System.out.println("===============================");
 
-        System.out.println("Nombre:"+nombre);
-        System.out.println("Parcial I:"+par1);
-        System.out.println("Parcial II:"+par2);
-        System.out.println("Parcial III:"+par3);
-        System.out.println("Promedio:"+prom_par);
-        System.out.println("Asistencia:"+asis);
-        System.out.println("Entrego Proyecto Final:"+entrega_p);
-        System.out.println("Promedio Final:"+cal_final);
-        System.out.println("Estado:");
+    public static void imprimirReporte(String nombre, double p1, double p2, double p3, double prom, int asis, boolean entProy, double finalScore, String estado) {
+        System.out.println("\n===============================");
+        System.out.println("         REPORTE FINAL         ");
+        System.out.println("===============================");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Parciales: " + p1 + " | " + p2 + " | " + p3);
+        System.out.println("Promedio Parciales: " + prom);
+        System.out.println("Asistencia: " + asis + "%");
+        System.out.println("Entrego Proyecto: " + entProy);
+        System.out.println("-------------------------------");
+        System.out.println("CALIFICACION FINAL: " + finalScore);
+        System.out.println("ESTADO: " + estado);
+        System.out.println("===============================");
     }
 }

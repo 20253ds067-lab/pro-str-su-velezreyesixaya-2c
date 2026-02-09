@@ -49,7 +49,7 @@ public class InputValueValidator {
                 sc.nextLine();
                 return valor;
             } else {
-                System.out.println("Error: Escribe 'true' o 'false'.");
+                System.out.println("Escribe 'true' o 'false' ");
                 sc.next();
             }
         }
