@@ -6,7 +6,6 @@ public class Principal {
 
     public static void main(String[] args) {
         int opc;
-
         do {
             System.out.println("\n--- GESTIÓN DE PERSONAS ---");
             System.out.println("1) Alta");
@@ -27,7 +26,7 @@ public class Principal {
                 case 4: listar(); break;
                 case 5: actualizar(); break;
                 case 0: System.out.println("Saliendo"); break;
-                default: System.out.println(">> Opción inválida");
+                default: System.out.println("Opción inválida");
             }
         } while (opc != 0);
     }
@@ -151,7 +150,6 @@ public class Principal {
             System.out.println("(No hay personas activas)");
         }
     }
-
     public static void actualizar() {
         int id;
         String nuevoNombre;
@@ -179,7 +177,6 @@ public class Principal {
                 break;
             }
         }
-
         if (!encontrado) {
             System.out.println("ID no encontrado o persona inactiva");
         }
