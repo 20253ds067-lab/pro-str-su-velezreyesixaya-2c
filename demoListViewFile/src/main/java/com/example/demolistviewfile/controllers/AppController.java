@@ -33,6 +33,16 @@ public class AppController {
     @FXML
     public void initialize(){
         listView.setItems(data);
+        listView.getSelectionModel().selectedItemProperty().addListener(
+                (obs,oldValue,newValue) ->{
+                    if (newValue!=null){
+                    String[] parts = newValue.split("-"); //para separar las lineas del csv y editar los campos por separado
+                    txtName.setText(parts[0]);
+                    txtEmail.setText(parts[1]);
+                    txtEdad.setText(parts[2]);
+                    }
+                }
+        );
         loadFromFile();
     }
 
@@ -61,6 +71,37 @@ public class AppController {
 
        }
 
+    }
+
+    @FXML
+
+    public void onUpdate(){
+        try{
+            int index = listView.getSelectionModel().getSelectedIndex();
+            String nombre = txtName.getText();
+            String email = txtEmail.getText();
+            String edad = txtEdad.getText();
+            service.updatePerson(index, nombre, email, edad);
+            loadFromFile();
+            txtName.clear();
+            txtEmail.clear();
+            txtEdad.clear();
+            lblMsg.setText("Se acutalizo el registro correctamente");
+        } catch (IOException e) {
+            lblMsg.setText("Hubo un error con el archivo");
+        }catch (IllegalArgumentException e ){
+            lblMsg.setText("Hubo un error con los datos"+e.getMessage());
+        }
+    }
+
+    @FXML
+    public void onDelete() throws IOException {
+        int index = listView.getSelectionModel().getSelectedIndex();
+        String nombre = txtName.getText();
+        String email = txtEmail.getText();
+        String edad = txtEdad.getText();
+        service.deletePerson(index, nombre, email, edad);
+        loadFromFile();
     }
 
     @FXML

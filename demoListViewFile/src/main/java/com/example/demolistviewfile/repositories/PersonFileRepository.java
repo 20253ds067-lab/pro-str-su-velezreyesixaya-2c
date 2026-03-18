@@ -14,6 +14,7 @@ public class PersonFileRepository {
 
     private void ensureFile() throws IOException {
 
+        //agregar validacion para crear la carpeta
         if(Files.notExists(pathFile)){
             Files.createFile(pathFile);
         }
@@ -28,6 +29,11 @@ public class PersonFileRepository {
         ensureFile();
         Files.writeString(pathFile, line+System.lineSeparator(),
                 StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+    }
+
+    public void saveFile(List<String> lines) throws IOException{
+
+        Files.write(pathFile,lines,StandardCharsets.UTF_8,StandardOpenOption.TRUNCATE_EXISTING);
     }
 
 }
