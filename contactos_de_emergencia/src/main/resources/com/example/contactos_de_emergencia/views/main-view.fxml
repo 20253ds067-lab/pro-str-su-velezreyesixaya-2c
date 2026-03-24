@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox spacing="20.0" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.contactos_de_emergencia.controllers.MainController">
+
+    <VBox maxWidth="260.0" minWidth="260.0" spacing="15.0">
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Registro de Emergencia" />
+
+        <VBox spacing="5.0">
+            <Label text="Nombre del contacto:" />
+            <TextField fx:id="txtNombre" />
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="Numero telefónico:" />
+            <TextField fx:id="txtTelefono" />
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="Relación familiar:" />
+            <ComboBox fx:id="cmbParentesco" prefWidth="260.0" promptText="Selecciona uno..." />
+        </VBox>
+
+        <Label fx:id="lblMensaje" minHeight="40.0" wrapText="true" />
+
+        <FlowPane hgap="10.0" vgap="10.0">
+            <Button onAction="#agregarContacto" text="Agregar" />
+            <Button onAction="#buscarContacto" text="Buscar" />
+            <Button onAction="#actualizarContacto" text="Actualizar" />
+            <Button onAction="#eliminarContacto" text="Eliminar" />
+            <Button onAction="#limpiarCampos" text="Limpiar" />
+        </FlowPane>
+    </VBox>
+
+    <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+        <Label style="-fx-font-weight: bold;" text="Contactos Guardados:" />
+        <ListView fx:id="listaContactosView" VBox.vgrow="ALWAYS" />
+    </VBox>
+
+</HBox>
